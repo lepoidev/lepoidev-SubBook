@@ -34,6 +34,6 @@
         app:elevation="0dp"
         app:layout_anchor="@+id/include2"
         app:layout_anchorGravity="right|bottom"
-        app:srcCompat="@drawable/plus" />
+        app:srcCompat="@drawable/ic_plus_white_48dp" />
 
 </android.support.design.widget.CoordinatorLayout>
