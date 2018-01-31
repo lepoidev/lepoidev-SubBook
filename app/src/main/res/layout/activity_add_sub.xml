@@ -31,6 +31,7 @@
         android:layout_marginStart="16dp"
         android:backgroundTint="@color/colorPrimary"
         android:elevation="0dp"
+        android:onClick="verifySub"
         android:text="Add"
         android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="parent"
