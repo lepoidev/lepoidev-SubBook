@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static ArrayList<Sub> subList;
     private static ArrayAdapter<Sub> adapter;
+    private boolean mustSave = false;
 
     @SuppressLint("CutPasteId")
     @Override
@@ -58,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddSubActivity.class);
                 startActivity(intent);
-                saveInFile();
+                //subList.clear();
+                //saveInFile();
                 adapter.notifyDataSetChanged();
                 /*
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         // TODO Auto-generated method stub
         super.onStart();
         Log.i("LifeCycle --->", "onStart is called");
+        //saveInFile();
         loadFromFile();
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_item, subs);
         adapter = new ArrayAdapter<Sub>(this, R.layout.list_item, subList);
@@ -108,20 +111,22 @@ public class MainActivity extends AppCompatActivity {
             Gson gson = new Gson();
             Type listType = new TypeToken<ArrayList<Sub>>(){}.getType();
             subList = gson.fromJson(in, listType);
-            Sub newSub = new Sub("netfux", new Date(), (float) 69, "ye");
-            subList.add(newSub);
+            //Sub newSub = new Sub("netfux", new Date(), (float) 69, "ye");
+            //subList.add(newSub);
+            //Sub newSub2 = new Sub("netfuux", new Date(), (float) 69, "ye");
+            //subList.add(newSub2);
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             subList = new ArrayList<Sub>();
-            Sub newSub = new Sub("netfux", new Date(), (float) 69, "ye");
-            subList.add(newSub);
+            //Sub newSub = new Sub("netfux", new Date(), (float) 69, "ye");
+            //subList.add(newSub);
             //e.printStackTrace();
         }
     }
 
     private void saveInFile() {
-        subList.clear();
+        //subList.clear();
         try {
             FileOutputStream fos = openFileOutput(FILENAME,
                     Context.MODE_PRIVATE);
@@ -140,25 +145,26 @@ public class MainActivity extends AppCompatActivity {
             throw new RuntimeException();
             //e.printStackTrace();
         }
+        adapter.notifyDataSetChanged();
     }
 
     public static void editSub(){
         //method to open edit activity
     }
-
-    public static void addSub(String name, Date date, float cost, String comment){
-        //subList.clear();
-
-        Sub newSub = new Sub(name, date, cost, comment);
-        subList.add(newSub);
-
-        //adapter.notifyDataSetChanged();
-        //saveInFile();
-    }
+    
 
     @Override
     protected void onDestroy() {
+        //saveInFile();
         super.onDestroy();
         Log.i("Lifecycle", "onDestroy is called");
+    }
+
+    public void setMustSave() {
+        this.mustSave = true;
+    }
+
+    public boolean isMustSave() {
+        return this.mustSave;
     }
 }

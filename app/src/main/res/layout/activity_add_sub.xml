@@ -48,7 +48,7 @@
         android:ems="10"
         android:hint="@string/str_Subcription_Name"
         android:inputType="textPersonName"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -63,7 +63,7 @@
         android:ems="10"
         android:hint="@string/str_Date"
         android:inputType="textPersonName"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText3" />
@@ -78,7 +78,7 @@
         android:ems="10"
         android:hint="@string/str_Monthly_Cost"
         android:inputType="textPersonName"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText4" />
@@ -93,7 +93,7 @@
         android:ems="10"
         android:hint="@string/str_Comment"
         android:inputType="textPersonName"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText5" />

@@ -8,21 +8,32 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
 public class AddSubActivity extends AppCompatActivity {
 
-    //private static final String FILENAME = "file.sav";
+    private static final String FILENAME = "file.sav";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,11 +95,59 @@ public class AddSubActivity extends AppCompatActivity {
         if (correct) {
             //System.out.println("Hi");
             //saveInFile(name, date, f_cost, comment);
-            MainActivity.addSub(name, date, f_cost, comment);
+            Log.i("Lifecycle", "attempting to add");
+            Sub newSub = new Sub(name, date, f_cost, comment);
+            addToFile(newSub);
             startActivity(intent);
+            //Log.i("Lifecycle", "addSub is called");
         } else {
             Snackbar.make(view, "Could not add subscription", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
+    }
+    private ArrayList<Sub> loadFromFile(){
+
+        ArrayList<Sub> subList;
+
+        try {
+            FileInputStream fis = openFileInput(FILENAME);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+
+            Gson gson = new Gson();
+            Type listType = new TypeToken<ArrayList<Sub>>(){}.getType();
+            subList = gson.fromJson(in, listType);
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            subList = new ArrayList<Sub>();
+            //e.printStackTrace();
+        }
+        return subList;
+    }
+    private void saveInFile(ArrayList<Sub> subList) {
+        //subList.clear();
+        try {
+            FileOutputStream fos = openFileOutput(FILENAME,
+                    Context.MODE_PRIVATE);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+
+            Gson gson = new Gson();
+            gson.toJson(subList, out);
+            out.flush();
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+            //e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+            //e.printStackTrace();
+        }
+    }
+    private void addToFile(Sub newSub){
+        ArrayList<Sub> subList = loadFromFile();
+        subList.add(newSub);
+        saveInFile(subList);
     }
 }
