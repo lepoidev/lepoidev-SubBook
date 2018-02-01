@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
     public static void editSub(){
         //method to open edit activity
     }
-    
+
 
     @Override
     protected void onDestroy() {

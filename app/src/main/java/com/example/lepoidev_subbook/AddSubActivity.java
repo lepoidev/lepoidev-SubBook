@@ -5,12 +5,14 @@ package com.example.lepoidev_subbook;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+//import android.R;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -58,8 +60,12 @@ public class AddSubActivity extends AppCompatActivity {
         boolean correct = true;
 
         String name = editText3.getText().toString();
+        editText3.setCompoundDrawables(null,null,null,null);
         if(20<name.length()){
+            editText3.setError("Must not be more that 20 characters");
             correct = false;
+        } else {
+            editText3.setError(null);
         }
 
         String str_date = editText4.getText().toString();
@@ -67,10 +73,12 @@ public class AddSubActivity extends AppCompatActivity {
         Date date = new Date();
         try {
             date = format.parse(str_date);
+            editText4.setError(null);
         } catch (ParseException e) {
             //need to print the text
             e.printStackTrace();
             correct = false;
+            editText4.setError("Enter date in form yyyy-dd-MM");
         }
 
         String cost = editText5.getText().toString();
@@ -80,16 +88,23 @@ public class AddSubActivity extends AppCompatActivity {
             if (f_cost < 0){
                 String err_str = "a";
                 f_cost = Float.parseFloat(err_str);
+                //editText4.setError(null);
                 //throw java.lang.NumberFormatException;
+            } else {
+                editText5.setError(null);
             }
         } catch (java.lang.NumberFormatException e){
             e.printStackTrace();
+            editText5.setError("Must be non-zero number");
             correct = false;
         }
 
         String comment = editText6.getText().toString();
         if(30<comment.length()){
             correct = false;
+            editText6.setError("Must not be more that 20 characters");
+        } else {
+            editText6.setError(null);
         }
 
         if (correct) {
