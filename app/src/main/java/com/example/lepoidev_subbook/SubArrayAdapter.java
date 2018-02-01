@@ -43,13 +43,14 @@ public class SubArrayAdapter extends ArrayAdapter<Sub> {
         HeaderSub headerSub = null;
 
         if (row == null){
-            //LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+            //LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(layoutResourceId, parent, false);
 
             headerSub = new HeaderSub();
             headerSub.name = (TextView) row.findViewById(R.id.list_entry_title);
             headerSub.cost = (TextView) row.findViewById(R.id.list_entry_summary);
+            headerSub.date = (TextView) row.findViewById(R.id.list_entry_date);
             /*
             headerSub.name = (TextView) row.findViewById(R.id.nameTextView);
             headerSub.cost = (TextView) row.findViewById(R.id.costTextView);
@@ -66,7 +67,7 @@ public class SubArrayAdapter extends ArrayAdapter<Sub> {
         Sub item = data.get(position);
         headerSub.name.setText(item.getName());
         headerSub.cost.setText(String.valueOf(item.getCost()));
-        //headerSub.date.setText((CharSequence) item.getDate());
+        headerSub.date.setText(item.getDate().toString());
 
         return row;
     }
