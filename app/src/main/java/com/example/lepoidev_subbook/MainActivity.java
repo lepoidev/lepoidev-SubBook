@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,13 +17,19 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String FILENAME = "file.sav";
     //private EditText bodyText;
     private ListView oldSubs;
+
+    private static ArrayList<Sub> subList;
+    private static ArrayAdapter<Sub> adapter;
 
     @SuppressLint("CutPasteId")
     @Override
@@ -41,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-
-        //bodyText = (EditText) findViewById(R.id.bodyText);
         oldSubs = (ListView) findViewById(R.id.oldSubs);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddSubActivity.class);
                 startActivity(intent);
+                saveInFile();
+                adapter.notifyDataSetChanged();
                 /*
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
@@ -60,8 +70,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         // TODO Auto-generated method stub
         super.onStart();
-        String[] subs = loadFromFile();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_item, subs);
+        Log.i("LifeCycle --->", "onStart is called");
+        loadFromFile();
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_item, subs);
+        adapter = new ArrayAdapter<Sub>(this, R.layout.list_item, subList);
         oldSubs.setAdapter(adapter);
     }
 
@@ -87,47 +99,66 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private String[] loadFromFile() {
-        ArrayList<String> subs = new ArrayList<String>();
+    private void loadFromFile() {
+
         try {
             FileInputStream fis = openFileInput(FILENAME);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-            String line = in.readLine();
-            while (line != null) {
-                subs.add(line);
-                line = in.readLine();
-            }
+
+            Gson gson = new Gson();
+            Type listType = new TypeToken<ArrayList<Sub>>(){}.getType();
+            subList = gson.fromJson(in, listType);
+            Sub newSub = new Sub("netfux", new Date(), (float) 69, "ye");
+            subList.add(newSub);
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            subList = new ArrayList<Sub>();
+            Sub newSub = new Sub("netfux", new Date(), (float) 69, "ye");
+            subList.add(newSub);
+            //e.printStackTrace();
         }
-        return subs.toArray(new String[subs.size()]);
     }
 
-    private void saveInFile(String text, Date date) {
+    private void saveInFile() {
+        subList.clear();
         try {
-            FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_APPEND);
-            fos.write(new String(date.toString() + " | " + text).getBytes());
-            fos.close();
+            FileOutputStream fos = openFileOutput(FILENAME,
+                    Context.MODE_PRIVATE);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+
+            Gson gson = new Gson();
+            gson.toJson(subList, out);
+            out.flush();
+
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new RuntimeException();
+            //e.printStackTrace();
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new RuntimeException();
+            //e.printStackTrace();
         }
     }
 
-    public void editSub(){
+    public static void editSub(){
         //method to open edit activity
     }
-    public void addSub(){
-        Intent intent = new Intent(this, AddSubActivity.class);
-        startActivity(intent);
-        //method to handle add activity
+
+    public static void addSub(String name, Date date, float cost, String comment){
+        //subList.clear();
+
+        Sub newSub = new Sub(name, date, cost, comment);
+        subList.add(newSub);
+
+        //adapter.notifyDataSetChanged();
+        //saveInFile();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i("Lifecycle", "onDestroy is called");
     }
 }

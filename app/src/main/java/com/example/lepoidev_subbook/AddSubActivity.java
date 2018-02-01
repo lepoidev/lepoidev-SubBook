@@ -3,6 +3,7 @@
 
 package com.example.lepoidev_subbook;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,6 +21,8 @@ import java.util.Date;
 import java.util.Locale;
 
 public class AddSubActivity extends AppCompatActivity {
+
+    //private static final String FILENAME = "file.sav";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +33,8 @@ public class AddSubActivity extends AppCompatActivity {
         //TextView.setTes
     }
 
+
+    //private void verifySub(View view){
     public void verifySub(View view){
 
         Intent intent = new Intent(AddSubActivity.this, MainActivity.class);
@@ -45,8 +53,9 @@ public class AddSubActivity extends AppCompatActivity {
 
         String str_date = editText4.getText().toString();
         DateFormat format = new SimpleDateFormat("yyyy-d-MM", Locale.ENGLISH);
+        Date date = new Date();
         try {
-            Date date = format.parse(str_date);
+            date = format.parse(str_date);
         } catch (ParseException e) {
             //need to print the text
             e.printStackTrace();
@@ -54,8 +63,9 @@ public class AddSubActivity extends AppCompatActivity {
         }
 
         String cost = editText5.getText().toString();
+        float f_cost = 0;
         try {
-            Float f_cost = Float.parseFloat(cost);
+            f_cost = Float.parseFloat(cost);
             if (f_cost < 0){
                 String err_str = "a";
                 f_cost = Float.parseFloat(err_str);
@@ -72,8 +82,11 @@ public class AddSubActivity extends AppCompatActivity {
         }
 
         if (correct) {
+            //System.out.println("Hi");
+            //saveInFile(name, date, f_cost, comment);
+            MainActivity.addSub(name, date, f_cost, comment);
             startActivity(intent);
-        } else{
+        } else {
             Snackbar.make(view, "Could not add subscription", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
