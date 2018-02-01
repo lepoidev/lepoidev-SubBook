@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+//import android.widget.TwoLineListItem;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +18,9 @@ import java.util.Date;
  * HEAVILY ADAPTED FROM BENJAMIN MOLINA's POST
  * https://stackoverflow.com/questions/36579485/how-do-i-use-an-array-of-objects-with-the-android-arrayadapter
  * https://stackoverflow.com/questions/11281952/listview-with-customized-row-layout-android
+ *
+ * List array from
+ * https://stackoverflow.com/questions/15297840/populate-listview-from-arraylist-of-objects
  */
 
 public class SubArrayAdapter extends ArrayAdapter<Sub> {
@@ -39,14 +43,19 @@ public class SubArrayAdapter extends ArrayAdapter<Sub> {
         HeaderSub headerSub = null;
 
         if (row == null){
-            LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+            //LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(layoutResourceId, parent, false);
 
             headerSub = new HeaderSub();
+            headerSub.name = (TextView) row.findViewById(R.id.list_entry_title);
+            headerSub.cost = (TextView) row.findViewById(R.id.list_entry_summary);
+            /*
             headerSub.name = (TextView) row.findViewById(R.id.nameTextView);
             headerSub.cost = (TextView) row.findViewById(R.id.costTextView);
             //headerSub.comment = (TextView) row.findViewById(R.id.commentTextView);
             headerSub.date = (TextView) row.findViewById(R.id.dateTextView);
+            */
 
             row.setTag(headerSub);
 
@@ -57,7 +66,7 @@ public class SubArrayAdapter extends ArrayAdapter<Sub> {
         Sub item = data.get(position);
         headerSub.name.setText(item.getName());
         headerSub.cost.setText(String.valueOf(item.getCost()));
-        headerSub.date.setText((CharSequence) item.getDate());
+        //headerSub.date.setText((CharSequence) item.getDate());
 
         return row;
     }

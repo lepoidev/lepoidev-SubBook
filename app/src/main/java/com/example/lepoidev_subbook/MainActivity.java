@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.content.Context;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TwoLineListItem;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -76,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
         //saveInFile();
         loadFromFile();
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_item, subs);
-        adapter = new ArrayAdapter<Sub>(this, R.layout.list_item, subList);
+        //adapter = new ArrayAdapter<Sub>(this, R.layout.list_item, subList);
+        adapter = new SubArrayAdapter(this, R.layout.two_item_list_view, subList);
         oldSubs.setAdapter(adapter);
     }
 
