@@ -157,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        //saveInFile();
         super.onDestroy();
         Log.i("Lifecycle", "onDestroy is called");
     }

@@ -47,6 +47,10 @@ public class Sub {
         return this.cost;
     }
 
+    public String strGetCost() {
+        return "$" + String.valueOf(this.cost);
+    }
+
     public String getComment() {
         return this.comment;
     }
