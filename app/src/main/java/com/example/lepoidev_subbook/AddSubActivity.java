@@ -1,5 +1,6 @@
 // https://stackoverflow.com/questions/4216745/java-string-to-date-conversion
 // https://stackoverflow.com/questions/8985295/edittext-seterror-with-icon-but-without-popup-message
+// https://stackoverflow.com/questions/18225365/show-error-on-the-tip-of-the-edit-text-android
 
 package com.example.lepoidev_subbook;
 
@@ -61,8 +62,8 @@ public class AddSubActivity extends AppCompatActivity {
 
         String name = editText3.getText().toString();
         editText3.setCompoundDrawables(null,null,null,null);
-        if(20<name.length()){
-            editText3.setError("Must not be more that 20 characters");
+        if((20<name.length()) && (name.length()>0)){
+            editText3.setError("Must not be more that 20 characters; cannot be empty");
             correct = false;
         } else {
             editText3.setError(null);

@@ -50,4 +50,9 @@ public class Sub {
     public String getComment() {
         return this.comment;
     }
+
+    public String toString(){
+        return name + " | " + date.toString() + " | " + cost;
+    }
+
 }
