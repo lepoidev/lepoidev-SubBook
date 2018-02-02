@@ -1,5 +1,9 @@
 package com.example.lepoidev_subbook;
 
+// https://stackoverflow.com/questions/4772425/change-date-format-in-a-java-string
+// http://www.java2s.com/Tutorial/Java/0040__Data-Type/SimpleDateFormat.htm
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -41,6 +45,12 @@ public class Sub {
 
     public Date getDate() {
         return this.date;
+    }
+
+    public String getStrDate() {
+        String strDate = new SimpleDateFormat("EEEE MMMM yyyy").format(this.date);
+        strDate = "Subscribed since " + strDate;
+        return strDate;
     }
 
     public float getCost() {

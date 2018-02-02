@@ -1,3 +1,9 @@
+/*
+    On LISTVIEW click
+    https://stackoverflow.com/questions/26842916/how-can-i-start-a-different-activity-on-item-click-from-a-custom-listview
+
+ */
+
 package com.example.lepoidev_subbook;
 
 import android.annotation.SuppressLint;
@@ -11,11 +17,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.content.Context;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TwoLineListItem;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -27,7 +32,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Date;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -67,6 +71,14 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                         */
+            }
+        });
+        oldSubs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
     }

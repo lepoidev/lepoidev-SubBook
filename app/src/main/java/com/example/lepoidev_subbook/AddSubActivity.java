@@ -69,7 +69,6 @@ public class AddSubActivity extends AppCompatActivity {
                                 // set day of month , month and year value in the edit text
                                 String newDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
                                 date.setText(newDate);
-
                             }
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();

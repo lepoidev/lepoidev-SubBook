@@ -68,7 +68,8 @@ public class SubArrayAdapter extends ArrayAdapter<Sub> {
         headerSub.name.setText(item.getName());
         //headerSub.cost.setText(String.valueOf(item.getCost()));
         headerSub.cost.setText(item.strGetCost());
-        headerSub.date.setText(item.getDate().toString());
+        //headerSub.date.setText(item.getDate().toString());
+        headerSub.date.setText(item.getStrDate());
 
         return row;
     }
