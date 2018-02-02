@@ -1,9 +1,11 @@
 // https://stackoverflow.com/questions/4216745/java-string-to-date-conversion
 // https://stackoverflow.com/questions/8985295/edittext-seterror-with-icon-but-without-popup-message
 // https://stackoverflow.com/questions/18225365/show-error-on-the-tip-of-the-edit-text-android
+// http://abhiandroid.com/ui/datepicker
 
 package com.example.lepoidev_subbook;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -12,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 //import android.R;
 
@@ -31,20 +34,47 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 public class AddSubActivity extends AppCompatActivity {
 
     private static final String FILENAME = "file.sav";
+    private EditText date;
+    DatePickerDialog datePickerDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_sub);
 
-        //TextView textview = findViewById(R.id.textView);
-        //TextView.setTes
+        date = (EditText) findViewById(R.id.editText4);
+        // perform click event on edit text
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // calender class's instance and get current date , month and year from calender
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR); // current year
+                int mMonth = c.get(Calendar.MONTH); // current month
+                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+                // date picker dialog
+                datePickerDialog = new DatePickerDialog(AddSubActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // set day of month , month and year value in the edit text
+                                String newDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                                date.setText(newDate);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
+        });
     }
 
 
