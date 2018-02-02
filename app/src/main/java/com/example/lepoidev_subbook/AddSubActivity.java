@@ -9,6 +9,8 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +39,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class AddSubActivity extends AppCompatActivity {
 
@@ -78,6 +81,7 @@ public class AddSubActivity extends AppCompatActivity {
 
 
     //private void verifySub(View view){
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void verifySub(View view){
 
         Intent intent = new Intent(AddSubActivity.this, MainActivity.class);
@@ -90,8 +94,8 @@ public class AddSubActivity extends AppCompatActivity {
         boolean correct = true;
 
         String name = editText3.getText().toString();
-        editText3.setCompoundDrawables(null,null,null,null);
-        if((20<name.length()) && (name.length()>0)){
+        //editText3.setCompoundDrawables(null,null,null,null);
+        if((20<name.length()) || (Objects.equals(name, ""))){
             editText3.setError("Must not be more that 20 characters; cannot be empty");
             correct = false;
         } else {
@@ -108,7 +112,7 @@ public class AddSubActivity extends AppCompatActivity {
             //need to print the text
             e.printStackTrace();
             correct = false;
-            editText4.setError("Enter date in form yyyy-dd-MM");
+            editText4.setError("Tap to open selection or enter date in form yyyy-dd-MM");
         }
 
         String cost = editText5.getText().toString();
@@ -125,14 +129,14 @@ public class AddSubActivity extends AppCompatActivity {
             }
         } catch (java.lang.NumberFormatException e){
             e.printStackTrace();
-            editText5.setError("Must be non-zero number");
+            editText5.setError("Must be non-negative number");
             correct = false;
         }
 
         String comment = editText6.getText().toString();
         if(30<comment.length()){
             correct = false;
-            editText6.setError("Must not be more that 20 characters");
+            editText6.setError("Must not be more that 30 characters");
         } else {
             editText6.setError(null);
         }
@@ -150,6 +154,7 @@ public class AddSubActivity extends AppCompatActivity {
                     .setAction("Action", null).show();
         }
     }
+
     private ArrayList<Sub> loadFromFile(){
 
         ArrayList<Sub> subList;

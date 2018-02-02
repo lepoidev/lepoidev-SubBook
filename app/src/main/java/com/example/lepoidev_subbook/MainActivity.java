@@ -64,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddSubActivity.class);
                 startActivity(intent);
-                //subList.clear();
-                //saveInFile();
                 adapter.notifyDataSetChanged();
                 /*
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -77,8 +75,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                String test = Integer.toString(position);
+                Snackbar.make(view, "Replace with your own action. Index:  " + test, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this, EditSubActivity.class);
+                intent.putExtra("pos", position);
+                startActivity(intent);
+                adapter.notifyDataSetChanged();
             }
         });
     }
