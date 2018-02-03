@@ -10,7 +10,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -19,17 +18,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.content.Context;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -45,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static ArrayList<Sub> subList;
     private static ArrayAdapter<Sub> adapter;
-    private boolean mustSave = false;
+    private TextView summaryText;// = (TextView) findViewById(R.id.summaryText);
 
     @SuppressLint("CutPasteId")
     @Override
@@ -53,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        summaryText = (TextView) findViewById(R.id.summaryText);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -76,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 String test = Integer.toString(position);
-                Snackbar.make(view, "Replace with your own action. Index:  " + test, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                /* Snackbar.make(view, "Replace with your own action. Index:  " + test, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show(); */
                 Intent intent = new Intent(MainActivity.this, EditSubActivity.class);
                 intent.putExtra("pos", position);
                 startActivity(intent);
@@ -95,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         //adapter = new ArrayAdapter<Sub>(this, R.layout.list_item, subList);
         adapter = new SubArrayAdapter(this, R.layout.two_item_list_view, subList);
         oldSubs.setAdapter(adapter);
+        setTitle();
     }
 
     @Override
@@ -142,45 +139,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void saveInFile() {
-        //subList.clear();
-        try {
-            FileOutputStream fos = openFileOutput(FILENAME,
-                    Context.MODE_PRIVATE);
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
-
-            Gson gson = new Gson();
-            gson.toJson(subList, out);
-            out.flush();
-
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-            //e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-            //e.printStackTrace();
-        }
-        adapter.notifyDataSetChanged();
-    }
-
-    public static void editSub(){
-        //method to open edit activity
-    }
-
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         Log.i("Lifecycle", "onDestroy is called");
     }
 
-    public void setMustSave() {
-        this.mustSave = true;
+    private void setTitle(){
+        float sum = getSubSum();
+        String newSummary = "Monthly Cost: $" + String.valueOf(sum);
+        summaryText.setText(newSummary);
     }
 
-    public boolean isMustSave() {
-        return this.mustSave;
+    private float getSubSum(){
+        float sum = 0;
+        for(int i = 0; i < subList.size(); i++){
+            sum = sum + subList.get(i).getCost();
+        }
+        return sum;
     }
 }
