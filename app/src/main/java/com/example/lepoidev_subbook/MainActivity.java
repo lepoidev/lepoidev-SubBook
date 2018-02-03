@@ -1,7 +1,11 @@
 /*
-    On LISTVIEW click
-    https://stackoverflow.com/questions/26842916/how-can-i-start-a-different-activity-on-item-click-from-a-custom-listview
-
+ * MainActivity
+ *
+ * Author: Kyle LePoidevin-Gonzales
+ *
+ * Resources
+ * https://stackoverflow.com/questions/26842916/how-can-i-start-a-different-activity-on-item-click-from-a-custom-listview - ListView click
+ *
  */
 
 package com.example.lepoidev_subbook;
@@ -34,12 +38,10 @@ import com.google.gson.reflect.TypeToken;
 public class MainActivity extends AppCompatActivity {
 
     //class variables
-    private static final String FILENAME = "file.sav";
-    //private EditText bodyText;
+    private final String FILENAME = "file.sav";
     private ListView oldSubs;
-
-    private static ArrayList<Sub> subList;
-    private static ArrayAdapter<Sub> adapter;
+    private ArrayList<Sub> subList;
+    private ArrayAdapter<Sub> adapter;
     private TextView summaryText;// = (TextView) findViewById(R.id.summaryText);
 
     @SuppressLint("CutPasteId")
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     protected void onStart() {
-        // TODO Auto-generated method stub
+
         super.onStart();
         Log.i("LifeCycle --->", "onStart is called");
         //saveInFile();
@@ -125,17 +127,9 @@ public class MainActivity extends AppCompatActivity {
             Gson gson = new Gson();
             Type listType = new TypeToken<ArrayList<Sub>>(){}.getType();
             subList = gson.fromJson(in, listType);
-            //Sub newSub = new Sub("netfux", new Date(), (float) 69, "ye");
-            //subList.add(newSub);
-            //Sub newSub2 = new Sub("netfuux", new Date(), (float) 69, "ye");
-            //subList.add(newSub2);
 
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             subList = new ArrayList<Sub>();
-            //Sub newSub = new Sub("netfux", new Date(), (float) 69, "ye");
-            //subList.add(newSub);
-            //e.printStackTrace();
         }
     }
 
@@ -147,8 +141,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void setTitle(){
         float sum = getSubSum();
-        String newSummary = "Monthly Cost: $" + String.valueOf(sum);
-        summaryText.setText(newSummary);
+        if (sum == 0){
+            String newSummary = "No Subscriptions";
+            summaryText.setText(newSummary);
+        } else {
+            String newSummary = "Monthly Cost: $" + String.valueOf(sum);
+            summaryText.setText(newSummary);
+        }
     }
 
     private float getSubSum(){

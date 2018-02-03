@@ -8,10 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-//import android.widget.TwoLineListItem;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by Kyle on 2018-02-01.
@@ -44,19 +42,13 @@ public class SubArrayAdapter extends ArrayAdapter<Sub> {
 
         if (row == null){
             LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-            //LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
             row = inflater.inflate(layoutResourceId, parent, false);
 
             headerSub = new HeaderSub();
             headerSub.name = (TextView) row.findViewById(R.id.list_entry_title);
             headerSub.cost = (TextView) row.findViewById(R.id.list_entry_summary);
             headerSub.date = (TextView) row.findViewById(R.id.list_entry_date);
-            /*
-            headerSub.name = (TextView) row.findViewById(R.id.nameTextView);
-            headerSub.cost = (TextView) row.findViewById(R.id.costTextView);
-            //headerSub.comment = (TextView) row.findViewById(R.id.commentTextView);
-            headerSub.date = (TextView) row.findViewById(R.id.dateTextView);
-            */
 
             row.setTag(headerSub);
 
@@ -66,9 +58,7 @@ public class SubArrayAdapter extends ArrayAdapter<Sub> {
 
         Sub item = data.get(position);
         headerSub.name.setText(item.getName());
-        //headerSub.cost.setText(String.valueOf(item.getCost()));
         headerSub.cost.setText(item.strGetCost());
-        //headerSub.date.setText(item.getDate().toString());
         headerSub.date.setText(item.getStrDate());
 
         return row;
@@ -78,6 +68,5 @@ public class SubArrayAdapter extends ArrayAdapter<Sub> {
         private TextView name;
         private TextView date;
         private TextView cost;
-        private TextView comment;
     }
 }
