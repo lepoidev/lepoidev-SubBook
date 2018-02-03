@@ -36,13 +36,11 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class MainActivity extends AppCompatActivity {
-
-    //class variables
     private final String FILENAME = "file.sav";
     private ListView oldSubs;
     private ArrayList<Sub> subList;
     private ArrayAdapter<Sub> adapter;
-    private TextView summaryText;// = (TextView) findViewById(R.id.summaryText);
+    private TextView summaryText;
 
     @SuppressLint("CutPasteId")
     @Override
@@ -69,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                         */
             }
         });
+
         oldSubs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
@@ -84,22 +83,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     protected void onStart() {
-
         super.onStart();
         Log.i("LifeCycle --->", "onStart is called");
-        //saveInFile();
         loadFromFile();
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_item, subs);
-        //adapter = new ArrayAdapter<Sub>(this, R.layout.list_item, subList);
+
         adapter = new SubArrayAdapter(this, R.layout.two_item_list_view, subList);
         oldSubs.setAdapter(adapter);
         setTitle();
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_main, menu); //this was commented out cause dont need
         return true;
     }
 
