@@ -4,10 +4,21 @@
  *  Author: Kyle LePoidevin-Gonzales
  *
  *  Resources
- *  https://stackoverflow.com/questions/4216745/java-string-to-date-conversion - conversion of string to date
- *  https://stackoverflow.com/questions/8985295/edittext-seterror-with-icon-but-without-popup-message - icon reference
- *  https://stackoverflow.com/questions/18225365/show-error-on-the-tip-of-the-edit-text-android - error message on EditView
- *  http://abhiandroid.com/ui/datepicker - for calender popup
+ *  https://stackoverflow.com/questions/4216745/java-string-to-date-conversion
+ *      For conversion of string to date
+ *      Author BalusC, Nov 18, 2010, no licence
+ *
+ *  https://stackoverflow.com/questions/8985295/edittext-seterror-with-icon-but-without-popup-message
+ *      For setting error message on EditView
+ *      Author user3921740, Sep 5 2014, no licence stated
+ *
+ *  https://stackoverflow.com/questions/18225365/show-error-on-the-tip-of-the-edit-text-android
+ *     For more information on setting error message on EditView
+ *     Author SilentKiller Aug 14, 2013
+ *
+ *  http://abhiandroid.com/ui/datepicker
+ *     For how to implement calender popup
+ *     Author abhiandroid, no publish date, no licence stated
  *
 */
 

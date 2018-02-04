@@ -4,7 +4,9 @@
  *  Author: Kyle LePoidevin-Gonzales
  *
  *  Resources
- *  http://www.codelocker.net/30205/android-create-a-popup-window-with-buttons/ - popup window
+ *  http://www.codelocker.net/30205/android-create-a-popup-window-with-buttons/
+ *      For popup window
+ *      by CodeLocker, published 2/24/2014, no listed licence
  *
  */
 package com.example.lepoidev_subbook;

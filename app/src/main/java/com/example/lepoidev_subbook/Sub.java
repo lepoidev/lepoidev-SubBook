@@ -4,8 +4,9 @@
  * Author: Kyle LePoidevin-Gonzales
  *
  * Resources
- * https://stackoverflow.com/questions/4772425/change-date-format-in-a-java-string
- * http://www.java2s.com/Tutorial/Java/0040__Data-Type/SimpleDateFormat.htm
+ *  https://stackoverflow.com/questions/4216745/java-string-to-date-conversion
+ *      For conversion of string to date
+ *      Author BalusC, Nov 18, 2010, no licence
  *
 */
 package com.example.lepoidev_subbook;

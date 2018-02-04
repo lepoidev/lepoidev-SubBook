@@ -4,7 +4,13 @@
  * Author: Kyle LePoidevin-Gonzales
  *
  * Resources
- * https://stackoverflow.com/questions/26842916/how-can-i-start-a-different-activity-on-item-click-from-a-custom-listview - ListView click
+ * https://stackoverflow.com/questions/26842916/how-can-i-start-a-different-activity-on-item-click-from-a-custom-listview
+ *      For on click action on listview
+ *      Author eurosecom, Nov 10, 2014, no licence stated
+ *
+ * https://stackoverflow.com/questions/18202815/passing-listview-data-through-intent
+ *      For passing values to a new activity
+ *      Author Raghunandan, Aug 13 2013, no licence stated
  *
  */
 
@@ -101,31 +107,6 @@ public class MainActivity extends AppCompatActivity {
         oldSubs.setAdapter(adapter);
         setTitle();
     }
-
-
-
-
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-    */
 
     /**
      * Load from file the contents of the subList

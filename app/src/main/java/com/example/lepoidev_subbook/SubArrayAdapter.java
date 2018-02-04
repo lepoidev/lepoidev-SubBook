@@ -1,3 +1,17 @@
+/*
+ *  SubArrayAdapter
+ *
+ *  Author: Kyle LePoidevin-Gonzales
+ *
+ * https://stackoverflow.com/questions/36579485/how-do-i-use-an-array-of-objects-with-the-android-arrayadapter
+ *      For general form of custom array adapter.
+ *      Author Benjamin Molina, Apr 12, 2016, no licence stated
+ *
+ * https://stackoverflow.com/questions/11281952/listview-with-customized-row-layout-android
+ *      For use of RelativeLayout.
+ *      Author Sajmon, Jul 1, 2012, no licence stated
+ */
+
 package com.example.lepoidev_subbook;
 
 import android.annotation.SuppressLint;
@@ -10,16 +24,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-
-/**
- * Created by Kyle on 2018-02-01.
- * HEAVILY ADAPTED FROM BENJAMIN MOLINA's POST
- * https://stackoverflow.com/questions/36579485/how-do-i-use-an-array-of-objects-with-the-android-arrayadapter
- * https://stackoverflow.com/questions/11281952/listview-with-customized-row-layout-android
- *
- * List array from
- * https://stackoverflow.com/questions/15297840/populate-listview-from-arraylist-of-objects
- */
 
 public class SubArrayAdapter extends ArrayAdapter<Sub> {
 
