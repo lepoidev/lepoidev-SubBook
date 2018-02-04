@@ -47,6 +47,11 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
+/**
+ * AddSubActivity lets the user input information for a new subscription. All data is verified
+ * before it is committed to the save file. A calender popup aids in inputting the date. The user
+ * is also given the option to not make a new subscription and return to the main screen.
+ */
 public class AddSubActivity extends AppCompatActivity {
     private static final String FILENAME = "file.sav";  //String of filename
     private EditText date;                              //EditText identifier for date

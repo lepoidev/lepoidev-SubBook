@@ -35,6 +35,11 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * MainActivity performs all actions pertaining to the home screen (ie list fo subscriptions and
+ * summary). The user may click on an item in the list or press the add button to add to the list.
+ *
+ */
 public class MainActivity extends AppCompatActivity {
     private final String FILENAME = "file.sav";
     private ListView oldSubs;
@@ -42,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<Sub> adapter;
     private TextView summaryText;
 
+    /**
+     * onCreate method for MainActivity. This function sets the on click listeners for the ListView
+     * and add button as well as initializes the list of subs and summary text.
+     *
+     * @param savedInstanceState
+     */
     @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, AddSubActivity.class);
                 startActivity(intent);
                 adapter.notifyDataSetChanged();
-                /*
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                        */
             }
         });
 
@@ -73,8 +80,6 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 String test = Integer.toString(position);
-                /* Snackbar.make(view, "Replace with your own action. Index:  " + test, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show(); */
                 Intent intent = new Intent(MainActivity.this, EditSubActivity.class);
                 intent.putExtra("pos", position);
                 startActivity(intent);
@@ -82,6 +87,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * This method loads the subList from savefile and sets the array adapter for the ListView
+     *
+     */
     protected void onStart() {
         super.onStart();
         Log.i("LifeCycle --->", "onStart is called");
@@ -93,6 +103,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
@@ -112,9 +125,14 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    */
 
+    /**
+     * Load from file the contents of the subList
+     *
+     * Please note this code is from lonelyTwitter with very mild edits
+     */
     private void loadFromFile() {
-
         try {
             FileInputStream fis = openFileInput(FILENAME);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
@@ -128,23 +146,39 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Close down activity
+     *
+     * Please note this code is from lonelyTwitter
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
         Log.i("Lifecycle", "onDestroy is called");
     }
 
+    /**
+     * This function sets the summary text at the top of the activity. If there are no subs, the
+     * summary text simply states the lack of subscriptions, otherwise the sum is diplayed
+     */
     private void setTitle(){
         float sum = getSubSum();
-        if (sum == 0){
-            String newSummary = "No Subscriptions";
-            summaryText.setText(newSummary);
-        } else {
-            String newSummary = "Monthly Cost: $" + String.valueOf(sum);
-            summaryText.setText(newSummary);
-        }
+        if ((sum == 0) && (subList.size() == 0)){
+        //if (sum == 0) {
+                String newSummary = "No Subscriptions";
+                summaryText.setText(newSummary);
+            } else {
+                String newSummary = "Monthly Cost: $" + String.valueOf(sum);
+                summaryText.setText(newSummary);
+            }
     }
+    //}
 
+    /**
+     * This method returns the sum of all subscriptions in the subList
+     *
+     * @return - the sum of all subscription costs
+     */
     private float getSubSum(){
         float sum = 0;
         for(int i = 0; i < subList.size(); i++){

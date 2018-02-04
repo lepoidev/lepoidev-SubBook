@@ -45,6 +45,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * EditSubActivity allows the user to view a subscription and if willing, edit the values. All input
+ * is checked for validity just as AddSubActivity. The user may even delete a subscription. A
+ * popup prompts the user to confirm deletion as well. This method has similar skeleton to
+ * AddSubActivity but with more features and modified functionalities.
+ */
 public class EditSubActivity extends AppCompatActivity {
     private static final String FILENAME = "file.sav";
     private EditText name;                              //local EditText variables
