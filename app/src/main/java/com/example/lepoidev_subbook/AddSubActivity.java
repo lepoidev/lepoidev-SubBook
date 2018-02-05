@@ -64,9 +64,9 @@ import java.util.Objects;
  * is also given the option to not make a new subscription and return to the main screen.
  */
 public class AddSubActivity extends AppCompatActivity {
-    private static final String FILENAME = "file.sav";  //String of filename
+    private final String FILENAME = "file.sav";  //String of filename
     private EditText date;                              //EditText identifier for date
-    DatePickerDialog datePickerDialog;                  //datePickerDialogue for Calender
+    private DatePickerDialog datePickerDialog;                  //datePickerDialogue for Calender
 
     /**
      * onCreate method for AddSubActivity. This function sets the datePickerDialog to trigger when
@@ -189,6 +189,7 @@ public class AddSubActivity extends AppCompatActivity {
         if (correct) {
             Log.i("Lifecycle", "attempting to add");
             Sub newSub = new Sub(name, date, costInFloat, comment);
+
             addToFile(newSub);
             startActivity(intent);
         } else {

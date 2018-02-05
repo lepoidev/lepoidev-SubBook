@@ -62,7 +62,7 @@ public class SubArrayAdapter extends ArrayAdapter<Sub> {
 
         Sub item = data.get(position);
         headerSub.name.setText(item.getName());
-        headerSub.cost.setText(item.strGetCost());
+        headerSub.cost.setText(item.getStrCost());
         headerSub.date.setText(item.getStrDate());
 
         return row;

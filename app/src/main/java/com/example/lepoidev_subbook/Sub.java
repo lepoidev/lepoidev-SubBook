@@ -118,7 +118,7 @@ public class Sub {
      *
      * @return - the cost in string
      */
-    public String strGetCost() {
+    public String getStrCost() {
         return "$" + String.valueOf(this.cost);
     }
 

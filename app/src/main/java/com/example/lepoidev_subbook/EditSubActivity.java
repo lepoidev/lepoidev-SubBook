@@ -198,20 +198,6 @@ public class EditSubActivity extends AppCompatActivity {
     }
 
     /**
-     * This method returns true of the vales were changed by the user.
-     *
-     * @param newName - user proposed new name
-     * @param newDate - user proposed new date
-     * @param newCost - user proposed new cost
-     * @param newComment - user proposed new comment
-     * @return - True if the values were changed
-     */
-    private boolean wasChanged(String newName, Date newDate, float newCost, String newComment){
-        //TODO implement if time to make prettier code
-        return true;
-    }
-
-    /**
      * This method verifies that the user input is valid and then calls for the data to be commited
      * and returns. Validation methodology is very similar to verifySub
      *
