@@ -99,7 +99,7 @@ public class Sub {
      * @return - the date in string form
      */
     public String getStrDate() {
-        String strDate = new SimpleDateFormat("EEEE MMMM dd, yyyy").format(this.date);
+        String strDate = new SimpleDateFormat("EEEE MMMM d, yyyy").format(this.date);
         strDate = "Subscribed since " + strDate;
         return strDate;
     }
