@@ -96,7 +96,7 @@ public class EditSubActivity extends AppCompatActivity {
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
                                 // set day of month , month and year value in the edit text
-                                String newDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                                String newDate = year + "-" + dayOfMonth  + "-" + (monthOfYear + 1);
                                 date.setText(newDate);
                             }
                         }, mYear, mMonth, mDay);

@@ -95,7 +95,7 @@ public class AddSubActivity extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
-                                String newDate1 = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                                String newDate1 = year + "-" + dayOfMonth  + "-" + (monthOfYear + 1);
                                 date.setText(newDate1);
                             }
                         }, mYear, mMonth, mDay);
